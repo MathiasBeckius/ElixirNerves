@@ -130,7 +130,7 @@ config :nerves_leds, names: [
   usr3: "beaglebone:green:usr3",
 ]
 ```
-Our definition, i.e. the name we'll use when operation the leds, are found to the left while the LED's directories (under /sys/class/leds) are found to the right.
+Our definitions, i.e. the names we'll use when operating the LED's, are found to the left while the LED's directories (in the /sys/class/leds directory) are found to the right.
 
 Rebuild the firmware:
 ```
