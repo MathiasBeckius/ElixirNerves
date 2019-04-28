@@ -10,7 +10,7 @@ In this tutorial we're going to:
 Equipment:
 * Beaglebone Black
 * USB-cable, to be connected between Beaglebone Black and your PC.
-* Micro-SD card
+* Micro-SD card (the firmware will take ~25 Megabytes of disk space)
 
 Prerequisites:
 * Elixir and Nerves are already installed.
@@ -58,25 +58,54 @@ Make sure that this is in line with your SSH configuration.
 ## Dependencies
 In order to use the Nerves.Leds library and also to be able to update firmware over SSH, we must add dependencies for [nerves_leds](https://github.com/nerves-project/nerves_leds) and [nerves_firmware_ssh](https://github.com/nerves-project/nerves_firmware_ssh) to **mix.exs**. After editing **mix.exs**, the dependency list will look something like this:
 ```elixir
-  defp deps do
-    [
-      # Dependencies for all targets
-      {:nerves, "~> 1.4", runtime: false},
-      {:shoehorn, "~> 0.4"},
-      {:ring_logger, "~> 0.6"},
-      {:toolshed, "~> 0.2"},
+defp deps do
+  [
+    # Dependencies for all targets
+    {:nerves, "~> 1.4", runtime: false},
+    {:shoehorn, "~> 0.4"},
+    {:ring_logger, "~> 0.6"},
+    {:toolshed, "~> 0.2"},
 
-      # Dependencies for all targets except :host
-      {:nerves_runtime, "~> 0.6", targets: @all_targets},
-      {:nerves_init_gadget, "~> 0.4", targets: @all_targets},
-      {:nerves_leds, "~> 0.8.0", targets: @all_targets},
-      {:nerves_firmware_ssh, "~> 0.3", targets: @all_targets},
+    # Dependencies for all targets except :host
+    {:nerves_runtime, "~> 0.6", targets: @all_targets},
+    {:nerves_init_gadget, "~> 0.4", targets: @all_targets},
+    {:nerves_leds, "~> 0.8.0", targets: @all_targets},
+    {:nerves_firmware_ssh, "~> 0.3", targets: @all_targets},
 
-      # Dependencies for specific targets
-      {:nerves_system_bbb, "~> 2.0", runtime: false, targets: :bbb},
-    ]
-  end
+    # Dependencies for specific targets
+    {:nerves_system_bbb, "~> 2.0", runtime: false, targets: :bbb},
+  ]
+end
 ```
+Now, run this command to make sure that the dependencies are in order:
+```
+mix deps.get
+```
+If you didn't specify target when you created the project, run this first:
+```
+export MIX_TARGET=bbb
+```
+You can also do the following:
+```
+MIX_TARGET=bbb mix deps.get
+```
+
+## Build firmware and create bootable SD card
+Build firmware:
+```
+MIX_TARGET=bbb mix firmware
+```
+Insert a micro-SD card and run (auto-detecting SD card):
+```
+MIX_TARGET=bbb mix firmware.burn
+```
+Take out the SD card, insert it into to your Beaglebone Black (not powered), and boot from the SD card (read more at http://beagleboard.org/getting-started).
+
+
+```
+
+```
+
 
 ```elixir
 ```
