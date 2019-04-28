@@ -3,7 +3,7 @@
 ## Introduction
 In this tutorial we're going to:
 * Create a Nerves project from scratch.
-* Prepare an SD card that will be used to boot our Nerves system from (i.e. the BEAM).
+* Prepare an SD card that will be used for booting our Nerves system.
 * Operate the built-in LED's on a [Beaglebone Black](https://beagleboard.org/black), using the [Nerves.Leds library](https://hexdocs.pm/nerves_leds/Nerves.Leds.html).
 * Upload new firmware via SSH.
 
@@ -41,7 +41,7 @@ Enter the project's directory:
 ```
 cd led_demo
 ```
-Since we will update firmware over SSH, we must make sure that the SSH configuration is in order.
+Since we will communicate with the Beaglebone over SSH, we must make sure that the SSH configuration is in order.
 Open **config/config.exs**. On rows 31-37, you'll find:
 ```elixir
 keys =
