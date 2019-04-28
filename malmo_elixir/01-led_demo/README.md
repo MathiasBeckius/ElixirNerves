@@ -18,8 +18,6 @@ Prerequisites:
 
 Although this tutorial will focus on a Beaglebone Black, this can easily be adapted e.g. for a Raspberry Pi board.
 
-I'm using Linux (Ubuntu) for this tutorial.
-
 ## Create a Nerves project
 First, make sure that your Nerves archive is up-to-date:
 ```
@@ -151,15 +149,38 @@ Now we're able to upload the new firmware:
 After the firmware is uploaded, the Beaglebone will reset.
 
 ## Time for playing with LED's
-```
-```
+Connect to the Beaglebone.
 
+By default, the USR0 LED is blinking in a "heartbeat" pattern. To turn the LED off, run the following:
 ```
+Nerves.Leds.set usr0: false
 ```
+When the LED was turned off, the Nerves.Leds library is actually writing to a file called **brightness**, located in the **/sys/class/leds/beaglebone:green:usr0** directory. In fact, we can read the current value by reading this file:
+```
+File.read!("/sys/class/leds/beaglebone:green:usr0/brightness")
+```
+The file should now contain "0\n".
 
+Turn the LED on:
 ```
+Nerves.Leds.set usr0: true
 ```
+Read the same file again. The contents should now be "1\n".
 
-```
-```
+There are also different patterns for blinking the LED's. Read more at [https://hexdocs.pm/nerves_leds/Nerves.Leds.html](https://hexdocs.pm/nerves_leds/Nerves.Leds.html).
 
+## References
+https://beagleboard.org/black
+
+https://hexdocs.pm/nerves/getting-started.html
+
+https://github.com/nerves-project/nerves_init_gadget
+
+https://github.com/nerves-project/nerves_firmware_ssh
+
+https://hexdocs.pm/nerves_leds/Nerves.Leds.html
+
+https://github.com/nerves-project/nerves_leds
+
+## Notes
+These instructions have been verified on a Linux system (Ubuntu).
