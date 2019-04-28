@@ -108,7 +108,7 @@ Connect by running:
 ```
 ssh nerves.local
 ```
-If successful, you will be inside the Elixir terminal that runs on the Beaglebone.
+If successful, you will now be inside the Elixir terminal that runs on the Beaglebone.
 
 The Nerves.Leds library will later be used to manipulate the LED's listed in **/sys/class/leds**. Let's list that directory:
 ```
@@ -119,12 +119,47 @@ You'll see four directories, named "beaglebone:green:usr0", "beaglebone:green:us
 Exit the terminal session by typing ```exit```, followed by ENTER.
 
 ## LED configuration
+The built-in LED's on the Beaglebone Black are called USR0, USR1, USR2 and USR3 (see https://beagleboard.org/getting-started#step1).
 
+We have to define these LED's in **config/config.exs**:
+```elixir
+config :nerves_leds, names: [
+  usr0: "beaglebone:green:usr0",
+  usr1: "beaglebone:green:usr1",
+  usr2: "beaglebone:green:usr2",
+  usr3: "beaglebone:green:usr3",
+]
+```
+Our definition, i.e. the name we'll use when operation the leds, are found to the left while the LED's directories (under /sys/class/leds) are found to the right.
 
-```elixir
+Rebuild the firmware:
 ```
-```elixir
+MIX_TARGET=bbb mix firmware
 ```
-```elixir
+
+## Upload new firmware
+Since we have configured the original firmware (that we booted from the SD card) for updates over SSH, we don't have take out the SD card and update it.
+
+First, we have to generate an uploader script:
+```
+MIX_TARGET=bbb mix firmware.gen.script
+```
+Now we're able to upload the new firmware:
+```
+./upload.sh nerves.local _build/bbb_dev/nerves/images/led_demo.fw
+```
+After the firmware is uploaded, the Beaglebone will reset.
+
+## Time for playing with LED's
+```
+```
+
+```
+```
+
+```
+```
+
+```
 ```
 
