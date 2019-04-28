@@ -77,7 +77,7 @@ defp deps do
   ]
 end
 ```
-Now, run this command to make sure that the dependencies are in order:
+Now, run this command to make sure that the dependencies are correct:
 ```
 mix deps.get
 ```
@@ -95,16 +95,30 @@ Build firmware:
 ```
 MIX_TARGET=bbb mix firmware
 ```
-Insert a micro-SD card and run (auto-detecting SD card):
+Insert a micro-SD card and run (assuming that only one SD card is inserted):
 ```
 MIX_TARGET=bbb mix firmware.burn
 ```
 Take out the SD card, insert it into to your Beaglebone Black (not powered), and boot from the SD card (read more at http://beagleboard.org/getting-started).
 
+## Connect to the Beaglebone Black
+The Nerves system starts in a second or two, but it will take 1.5-2 minutes before we can connect to the Beaglebone Black. In this case, an Ethernet-over-USB connection will be automatically setup. By default, the DNS name of the target hardware is **nerves.local**. Ping the device, and you'll see when the device is ready.
 
+Connect by running:
 ```
+ssh nerves.local
+```
+If successful, you will be inside the Elixir terminal that runs on the Beaglebone.
 
+The Nerves.Leds library will later be used to manipulate the LED's listed in **/sys/class/leds**. Let's list that directory:
 ```
+ls "/sys/class/leds"
+```
+You'll see four directories, named "beaglebone:green:usr0", "beaglebone:green:usr1", etc. Remember these names.
+
+Exit the terminal session by typing ```exit```, followed by ENTER.
+
+## LED configuration
 
 
 ```elixir
