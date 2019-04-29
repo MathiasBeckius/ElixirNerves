@@ -169,6 +169,9 @@ Read the same file again. The contents should now be "1\n".
 
 There are also different patterns for blinking the LED's. Read more at [https://hexdocs.pm/nerves_leds/Nerves.Leds.html](https://hexdocs.pm/nerves_leds/Nerves.Leds.html).
 
+## Source code
+The source code can be found [here](./led_demo).
+
 ## References
 https://beagleboard.org/black
 
