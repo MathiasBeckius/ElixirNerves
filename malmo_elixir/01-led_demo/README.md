@@ -183,4 +183,4 @@ https://hexdocs.pm/nerves_leds/Nerves.Leds.html
 https://github.com/nerves-project/nerves_leds
 
 ## Notes
-These instructions have been verified on a Linux system (Ubuntu).
+These instructions have been verified on a Linux system (Ubuntu), running Elixir 1.8.1, Nerves Bootstrap 1.5.0 and Nerves 1.4.3.
