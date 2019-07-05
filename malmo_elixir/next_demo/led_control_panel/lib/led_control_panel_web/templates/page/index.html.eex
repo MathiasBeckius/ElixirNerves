@@ -1,0 +1,7 @@
+<h1>LED Control Panel</h1>
+
+<%= form_for(@conn, Routes.page_path(@conn, :set_led), [ as: :set_led, method: :put], fn f -> %>
+  <%= select(f, :led_list, [[key: "USR0", value: :usr0], [key: "USR1", value: :usr1], [key: "USR2", value: :usr2], [key: "USR3", value: :usr3], [key: "All LEDS", value: :all]], selected: :all) %>
+  <%= select(f, :led_state, [{"off", :off}, {"on", :on}], selected: :off) %>
+  <%= submit("UPDATE") %>
+<% end) %>
